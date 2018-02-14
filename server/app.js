@@ -2,6 +2,7 @@ const express = require("express");
 const morgan = require("morgan");
 const mongoose = require("mongoose");
 const bodyParser = require("body-parser");
+const homepage = require("./routes/homepage")
 
 mongoose.connect("mongodb://localhost/my-blog");
 
@@ -14,7 +15,7 @@ app.use(morgan("dev"));
 app.use(bodyParser.json());
 
 app.get("/", (req, res) => {
-  res.status(200).send("use api/blogs or api/users");
+  res.status(200).send(homepage);
 });
 
 app.use("/api/users", require("./routes/users"));
