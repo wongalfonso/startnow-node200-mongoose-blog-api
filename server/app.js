@@ -14,7 +14,7 @@ app.use(morgan("dev"));
 app.use(bodyParser.json());
 
 app.get("/", (req, res) => {
-  res.status(200).send();
+  res.status(200).send("use api/blogs or api/users");
 });
 
 app.use("/api/users", require("./routes/users"));
