@@ -3,13 +3,16 @@ const morgan = require("morgan");
 const mongoose = require("mongoose");
 const bodyParser = require("body-parser");
 
-let uri = "mongodb://heroku_6ppd3vwr:5s5tqpnfbqd5kuv23s7rpg7ja9@ds235768.mlab.com:35768/heroku_6ppd3vwr"
+let uri = "mongodb://heroku_6ppd3vwr:5s5tqpnfbqd5kuv23s7rpg7ja9@ds235768.mlab.com:35768/heroku_6ppd3vwr";
 
-mongoose.connect(uri);
+mongoose.connect(process.env.PORT || uri);
+
 mongoose.Promise = Promise;
 
-var db = mongoose.connection;
-db.on("error", console.error.bind(console, "MongoDB connection error:"));
+let db = mongoose.connection;
+
+db.on("error", console.error.bind(console, "connection error:"));
+
 const app = express();
 
 app.use(morgan("dev"));
