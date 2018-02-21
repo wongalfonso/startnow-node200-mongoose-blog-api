@@ -30,22 +30,24 @@ router.get("/:id", (req, res) => {
 });
 
 
-router.post("/", (req, res) => {
-
+router.post('/', (req, res) => {
   let dbUser = null;
+
   User
-    .findById(req.query.userId)
-    .then(user => {
-      dbUser = user;
-      const newBlog = new Blog(req.body);
-      newBlog.author = user._id;
-      return newBlog.save();
-    })
-    .then(blog => {
-      dbUser.blogs.push(blog);
-      dbUser.save().then(() => res.status(201).json(blog))
-    })
-    .catch(err => res.status(500).send("bad post"));
+      .findById(req.query.userId)
+      .then(user => {
+          dbUser = user;
+          const newBlog = new Blog(req.body);
+          newBlog.author = user._id;
+          return newBlog.save();
+      })
+      .then(blog => {
+          dbUser.blogs.push(blog);
+          dbUser.save().then(() => res.status(201).json(blog));
+      })
+  
+      .catch(e => res.status(500).send('bad'));
+
 });
 
 
